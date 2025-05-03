@@ -25,5 +25,5 @@ fac-numero, fac-cli-codigo, fac-tipo → fac-cli-nombre, fac-fecha, fac-importe
 DP
 fac-cli-codigo → fac-cli-nombre
 <br>
-> Poner fac-tipo como parte de la clave esta mal porque el tipo tiene que prexistir antes que la factura
->
+Poner fac-tipo como parte de la clave esta mal porque el tipo tiene que prexistir antes que la factura
+
