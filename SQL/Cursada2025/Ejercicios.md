@@ -11,3 +11,12 @@ Mostrar toda la información de los clientes.
 SELECT * FROM CLIENTE
 
 ---
+
+# Ejercicio 2
+---
+
+Listar solamente el “apellido y nombres” (orden descendente) de todos los clientes.
+
+#Resolucion
+---
+SELECT 
