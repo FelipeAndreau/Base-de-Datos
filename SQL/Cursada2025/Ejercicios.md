@@ -6,11 +6,11 @@
 Mostrar toda la información de los clientes.
 
 # Resolucion
----
+'''sql
 
 SELECT * FROM CLIENTE
 
----
+'''
 
 # Ejercicio 2
 ---
@@ -18,5 +18,6 @@ SELECT * FROM CLIENTE
 Listar solamente el “apellido y nombres” (orden descendente) de todos los clientes.
 
 #Resolucion
----
+'''sql
 SELECT 
+'''
