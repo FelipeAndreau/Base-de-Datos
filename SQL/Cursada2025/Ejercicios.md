@@ -20,8 +20,8 @@ SELECT Apellido , Nombre FROM CLIENTE ORDER BY Apellido DESC, Nombre DESC
 Realizar una selección que le permita mostrar la CANTIDAD total de clientes por tipo de IVA existente.
 
 ```sql
-SELECT TD.Descripcion AS TipoIVA, COUNT(*) AS CantidadClientes FROM Cliente C
-JOIN TipoDeIva TD ON C.IDTipoIva = TD.IDTipoIva
+SELECT TD.Descripcion AS TipoIVA, COUNT(*) AS CantidadClientes
+FROM Cliente C JOIN TipoDeIva TD ON C.IDTipoIva = TD.IDTipoIva
 GROUP BY TD.Descripcion
 
 ```
@@ -31,9 +31,7 @@ Realizar una selección que le permita listar toda la información pertinente de
 el apellido Martinez.
 
 ```sql
-SELECT *
-FROM Cliente
-WHERE Apellido = 'Martinez'
+SELECT * FROM Cliente WHERE Apellido = 'Martinez'
 
 ```
 # Ejercicio 5
