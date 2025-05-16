@@ -17,7 +17,7 @@ SELECT * FROM CLIENTE
 
 Listar solamente el “apellido y nombres” (orden descendente) de todos los clientes.
 
-#Resolucion
+# Resolucion
 ```sql
-SELECT 
+SELECT Apellido , Nombre FROM CLIENTE ORDER BY Apellido DESC, Nombre DESC
 ```
