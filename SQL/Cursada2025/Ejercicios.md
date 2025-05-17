@@ -20,9 +20,9 @@ SELECT Apellido , Nombre FROM CLIENTE ORDER BY Apellido DESC, Nombre DESC
 Realizar una selección que le permita mostrar la CANTIDAD total de clientes por tipo de IVA existente.
 
 ```sql
-SELECT IDTipoIva, COUNT(*) AS CantidadCliente
-FROM Cliente
-GROUP BY IDTivoIva
+SELECT Ti.Descripcion, CantidadClientes = COUNT(C.IdCliente)
+FROM TipoDeIva TI LEFT JOIN Cliente C ON TI.IDTipoIva = C.IDTipoIVA
+GROUP BY TI.Descripcion
 
 ```
 
@@ -31,7 +31,9 @@ Realizar una selección que le permita listar toda la información pertinente de
 el apellido Martinez.
 
 ```sql
-SELECT * FROM Cliente WHERE Apellido = 'Martinez'
+SELECT *
+FROM Cliente C
+WHERE C.RazonSolcial like '%Martinez%'
 
 ```
 # Ejercicio 5
@@ -39,7 +41,7 @@ Muestre un informe que brinde como resultado: la cantidad de clientes que tienen
 Debe indicar Nombre, Cantidad.
 
 ```sql
-SELECT Nombre, COUNT(*) AS Cantidad
+SELECT RazonSocial, COUNT(*) AS Cantidad
 FROM Cliente
 GROUP BY Nombre
 
@@ -50,5 +52,31 @@ Realizar una selección que le permita listar la cantidad de veces que se vendi�
 actual. Cantidad de veces, no es cantidad de artículos.
 
 ```sql
+SELECT A.Descripcion, Cantidad = COUNT(*)
+FROM Venta V JOIN ItemVenta IV ON V.idVenta = IV.idVenta
+RIGHT JOIN Articulo A ON IV.idArticulo = A.idArticulo
+WHERE YEAR(V.Fecha) = 2025
+group by A.Descipcion 
+```
 
+# Ejercicio 7
+Realizar una selección que le permita listar solamente el “apellido y nombre” y DNI de todos los clientes
+ordenados por DNI (ascendente), que no tengan un CUIT registrado.
+
+```sql
+SELECT Apellido , Nombre
+FROM CLIENTE
+WHERE CUIT NOT NULL
+ORDER BY DNI ASC
+```
+
+# Ejercicio 11
+Resuelva el listado que devuelva cual fue el monto vendido por empresa en el año actual.
+
+```sql
+SELECT E.RazonSocial , MontonVenta = SUM(IV.Cantidad * IV.Precio)
+FROM Empresa E JOIN Venta V ON E.idEmpresa = V.idEmpresa
+JOIN ItemVenta IV ON V.idVenta = IV.idVenta
+WHERE YEAR(V.Fecha) = YEAR(GETDATE())
+GROUP BY E.RazonSocial
 ```
