@@ -6,8 +6,8 @@ Justificar.
 | :--: | :--: | :--: | :--: |
 | R(A) |      |      |      |
 |      |      | R(C) |      |
-|      | R(B) |      | R(D) |
-| W(A) |      |      |      |
+|      | R(B) |      |      |
+| W(A) |      |      | R(D) |
 |      |      | W(C) |      |
 |      | W(B) |      |      |
 |      |      |      | W(D) |
@@ -36,10 +36,15 @@ Justificar.
 |             |          |   read(C)   |
 |             |          |   read(A)   |
 |             |          | A := A \* C |
-|             |          |   write(A)  |
+|             |          |             |
 |   read(B)   |          |             |
 |  A := B + 2 |          |             |
+|             |          |  write(A)   |
 | B := B \* 2 |          |             |
-|   write(A)  |          |             |
+| write(A)    |          |             |
 |             | A := 100 |             |
 |             | write(A) |             |
+
+---
+
+
