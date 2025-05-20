@@ -51,3 +51,36 @@ Dado A = B = 25, los dos órdenes posibles y sus resultados son:
 - **Conflictos**: pares de operaciones sobre la misma variable donde al menos una es escritura, indicando el orden forzado.
 - El **grafo** muestra que no hay ciclos, por lo que ambas planificaciones son conflict-serializables.  
 
+## c) Planificación **no** conflict-serializable
+
+Partiendo de A = B = 25, consideremos el siguiente intercalado:
+
+| Paso | Operación  | Variable | Transacción |
+|-----:|:-----------|:---------|:------------|
+| 1    | `R6(A)`    | A        | T₆          |
+| 2    | `W6(A)`    | A        | T₆          |
+| 3    | `R7(A)`    | A        | T₇          |
+| 4    | `W7(A)`    | A        | T₇          |
+| 5    | `R7(B)`    | B        | T₇          |
+| 6    | `W7(B)`    | B        | T₇          |
+| 7    | `R6(B)`    | B        | T₆          |
+| 8    | `W6(B)`    | B        | T₆          |
+
+**Conflictos detectados**  
+- **Sobre A**:  
+  - `W6(A)` → `R7(A)`  ⇒ arista **T₆ → T₇**  
+  - `W6(A)` → `W7(A)`  ⇒ arista **T₆ → T₇**  
+- **Sobre B**:  
+  - `W7(B)` → `R6(B)`  ⇒ arista **T₇ → T₆**  
+  - `W7(B)` → `W6(B)`  ⇒ arista **T₇ → T₆**  
+
+**Grafo de precedencia**  
+
+```mermaid
+graph LR
+  T6 --> T7
+  T7 --> T6
+```
+
+Hay un ciclo **T₆→T₇→T₆**, por lo que esta planificación **no** es conflict-serializable.  
+
