@@ -17,9 +17,8 @@ Para las siguientes transacciones T6 y T7 con A = B = 25:
 
 ## A) Resultados de las ejecuciones en serie
 
-```
-Los posibles resultados con la ejecucion en serie de estas transacciones son 2!=2, ya que la cantidad de transacciones posibles son n!
-```
+> Los posibles resultados con la ejecucion en serie de estas transacciones son 2!=2, ya que la cantidad de transacciones posibles son n!
+
 
 Dado A = B = 25, los dos órdenes posibles y sus resultados son:
 
