@@ -21,35 +21,19 @@ Suponiendo que las transacciones **T₈**, **T₉** y **T₁₀** se pueden ejec
 
 ### Caso 1: Resultado = 1
 
-| **T8**         | **T9** | **T10**      |
-|:---------------|:-------|:-------------|
-| Read(A)        |        | Read(A)      |
-| A := A + 1     |        | Mostrar(A)   |
-| Write(A)       |        | A := 1       |
+![image](https://github.com/user-attachments/assets/684ec6f0-883e-4c00-a4e1-ffeef4e09b7f)
 
-Aquí el resultado que devuelve A es **1**
 
 ---
 
 ### Caso 2: Resultado = 3
 
-| **T8** | **T9**         | **T10**      |
-|:-------|:---------------|:-------------|
-|        | Read(A)        | Read(A)      |
-|        | A := A * 2     | Mostrar(A)   |
-|        | Write(A)       | A := 1       |
-
-Aquí el resultado que devuelve A es **3**
+![image](https://github.com/user-attachments/assets/35a72435-fc6a-4868-991b-7204eac0fe07)
 
 ---
 
 ### Caso 3: Resultado = 2
 
-| **T8**         | **T9**         | **T10**      |
-|:---------------|:---------------|:-------------|
-| Read(A)        | Read(A)        | Read(A)      |
-| A := A + 1     | A := A * 2     | Mostrar(A)   |
-| Write(A)       | Write(A)       | A := 1       |
+![image](https://github.com/user-attachments/assets/597ef034-cfb5-4d10-b1aa-cd6bc467b792)
 
-En este caso el resultado que devuelve A es **2**
 
