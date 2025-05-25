@@ -296,6 +296,10 @@ Una **expresión de álgebra relacional** es una secuencia de operaciones aplica
 | **Proyección**                | π       | Extrae columnas: π (nom, edad)(R); elimina duplicados automáticamente.                          |
 | **Renombre**                  | ρ       | Alias para una relación: ρ (NuevaR)(R); evita ambigüedades en autouniones o self-joins.         |
 
+![image](https://github.com/user-attachments/assets/719bc946-4c68-401c-b778-dbf6fc2adb8f)
+![image](https://github.com/user-attachments/assets/686920d1-b3b2-4a5c-b636-9255f663d76a)
+
+
 ### 3.2 Binarios (entre dos relaciones)
 
 | Operación                     | Símbolo | Descripción                                                                                                 |
@@ -305,7 +309,6 @@ Una **expresión de álgebra relacional** es una secuencia de operaciones aplica
 | **Diferencia**                | –       | R – S: tuplas que están en R pero no en S.                                                                   |
 
 ![image](https://github.com/user-attachments/assets/87d261af-6a2e-4275-aeec-b8c559d27b40)
-![image](https://github.com/user-attachments/assets/719bc946-4c68-401c-b778-dbf6fc2adb8f)
 ![image](https://github.com/user-attachments/assets/6dda4ca1-ef62-4038-9025-15e35d429d73)
 ![image](https://github.com/user-attachments/assets/34c23bb7-6a23-4d25-a504-722a2ffc4b05)
 
@@ -335,4 +338,5 @@ Una **expresión de álgebra relacional** es una secuencia de operaciones aplica
 | Tipo       | Ejemplo                                                 | Descripción                                                                                 |
 |------------|---------------------------------------------------------|---------------------------------------------------------------------------------------------|
 | **Alta**   | X ← X ∪ {('pollera','amarilla')}                       | Inserta tuplas nuevas usando ∪ y 🡨.                                                         |
-| **Baja**   |  
+| **Baja**   | azul ← σ color=”azul”(X) /// X←X-azul /// δ color=”naranja” (azul) /// X←X U azul  | : A través de la operación de diferencia (-) y la operación de Asignación.|
+| **Modificacion**   | -                       | Realiza cambios dentro de una tabla, como actualizarla.                                                    |
