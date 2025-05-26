@@ -84,3 +84,53 @@ graph LR
 
 Hay un ciclo **T₆→T₇→T₆**, por lo que esta planificación **no** es conflict-serializable.  
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Ejercicio 15 (versión definitiva)
+
+## 1. Bitácora (log) – Actualización inmediata
+
+| LSN | Acción                     | Detalles                          |
+|-----|----------------------------|-----------------------------------|
+|  1  | `<Inicio T1>`               | Inicio de T₁                      |
+|  2  | `<T1, T = x * 2`  | write(T) := X * 2                 |
+|  3  | `<Inicio T2>`               | Inicio de T₂                      |
+|  4  | `<T2, Y = Y + 4`  | write(Y) := Y + 4                 |
+|  5  | `<Inicio T3>`               | Inicio de T₃                      |
+|  6  | `<T3, Y = X = 10` | write(Y) := X + 10                |
+|  7  | `<COMMIT T3>`              | T₃ confirma y sus cambios persisten |
+| —   | **CRASH**                  | Antes de que T₂ lea/escriba Z     |
+
+> **Nota:** Aunque T₁ y T₂ nunca hacen COMMIT, sus writes ya fueron aplicados (inmediato).
+
+## 2. Recuperación
+
+1. **REDO** (sólo transacciones confirmadas):  
+   - Reaplicar LSN 6: `<T3, Y, …, new′(Y)>` → garantizar Y = X+10 en disco.
+
+2. **UNDO** (todas las transacciones sin COMMIT), en orden inverso:  
+   - LSN 4: deshacer `<T2, Y, old(Y), new(Y)>` → restaurar Y = old(Y).  
+   - LSN 2: deshacer `<T1, T, old(T), new(T)>` → restaurar T = old(T).
+
+3. **Estado final**:  
+   - **Y** conserva el cambio de T₃.  
+   - **T** y **Y** (de T₂) vuelven a sus valores anteriores.  
+   - **Z** nunca se modificó en disco y permanece intacto.
+
