@@ -97,12 +97,136 @@ Realizar una selección que le permita listar el promedio de veces que ha sido v
 historial, y ordenar de manera descendente de mayor a menor. De cada artículo incluir el dato de código y 
 descripción. 
 
+```sql
+SELECT 
+    A.codigo,
+    A.Descripcion, 
+    AVG(IV.cantidad) AS promedio
+FROM Venta V 
+JOIN ItemVenta IV ON V.idVenta = IV.idVenta 
+JOIN Articulo A ON IV.idArticulo = A.idArticulo
+GROUP BY A.codigo, A.Descripcion
+ORDER BY promedio DESC;
+```
+
 # Ejercicio 10 
 Devuelva el listado de la cantidad de artículos registrada por cada sección por cada empresa. Ordenar todo 
 por orden alfabético. 
 
+```sql
+SELECT 
+    E.RazonSocial,
+    S.NombreSeccion,
+    COUNT(A.idArticulo) AS CantidadArticulos
+FROM Seccion S
+JOIN Empresa E ON S.idEmpresa = E.idEmpresa
+JOIN Rubro R ON R.idSeccion = S.idSeccion
+JOIN Articulo A ON A.idRubro = R.idRubro
+GROUP BY E.RazonSocial, S.NombreSeccion
+ORDER BY E.RazonSocial, S.NombreSeccion;
+```
+
 # Ejercicio 11 
 Resuelva el listado que devuelva cual fue el monto vendido por empresa en el año actual. 
 
+```sql
+SELECT 
+    E.RazonSocial, 
+    SUM(IV.Cantidad * IV.Precio) AS MontoVendido
+FROM Empresa E
+JOIN Seccion S ON E.idEmpresa = S.idEmpresa
+JOIN Rubro R ON S.idSeccion = R.idSeccion
+JOIN Articulo A ON R.idRubro = A.idRubro
+JOIN ItemVenta IV ON A.idArticulo = IV.idArticulo
+JOIN Venta V ON V.idVenta = IV.idVenta
+WHERE YEAR(V.Fecha) = YEAR(GETDATE())
+GROUP BY E.RazonSocial
+ORDER BY E.RazonSocial;
+```
+
 # Ejercicio 12 
 Realizar una selección de los productos que se contengan la palabra “unipolar”, junto con sus precios.
+
+```sql
+SELECT Descripcion, Precio FROM Articulo WHERE Descripcion LIKE '%unipolar%';
+```
+
+# Ejercicio 13 
+Generar la consulta que emita la lista de precios más completa de cada empresa. 
+
+```sql
+SELECT 
+    E.RazonSocial AS Empresa,
+    A.Descripcion AS Articulo,
+    A.Precio
+FROM Empresa E
+JOIN Seccion S ON E.idEmpresa = S.idEmpresa
+JOIN Rubro R ON S.idSeccion = R.idSeccion
+JOIN Articulo A ON R.idRubro = A.idRubro
+ORDER BY E.RazonSocial, A.Descripcion;
+```
+
+# Ejercicio 14 
+Devolver el listado de los Usuarios que estén registrados en más de una empresa. Devolver, Apellido y 
+Nombre, y la cantidad de empresas en las que se encuentra registrado. 
+
+```sql
+SELECT U.AyN, COUNT(*) AS UsuariosRegistrados
+FROM Usuario U
+JOIN UsuarioXEmpresa UXE ON U.UserToken = UXE.UserToken
+JOIN Empresa E ON UXE.idEmpresa = E.idEmpresa
+
+GROUP BY U.AyN
+HAVING COUNT(DISTINCT UXE.idEmpresa) > 1
+```
+
+# Ejercicio 15 
+Listar los artículos que nunca han sido vendidos. Luego listar la cantidad de artículos que jamás 
+fueron vendidos. 
+
+```sql
+SELECT A.idArticulo, A.Descripcion
+INTO ArticulosNoVendidos
+FROM Articulo A
+WHERE A.idArticulo NOT IN (
+    SELECT IV.idArticulo FROM ItemVenta IV
+);
+
+SELECT COUNT(*) AS CantidadArticulosNoVendidos
+FROM ArticulosNoVendidos;
+```
+
+# Ejercicio 16 
+Listar el monto total vendido por mes en el año 2019 por cada una de las empresas. 
+
+```sql
+SELECT 
+    E.RazonSocial, 
+    MONTH(V.Fecha) AS Mes,
+    SUM(IV.Cantidad * IV.Precio) AS MontoPorMes
+FROM Empresa E
+JOIN Seccion S ON E.idEmpresa = S.idEmpresa
+JOIN Rubro R ON S.idSeccion = R.idSeccion
+JOIN Articulo A ON R.idRubro = A.idRubro
+JOIN ItemVenta IV ON A.idArticulo = IV.idArticulo
+JOIN Venta V ON V.idVenta = IV.idVenta
+WHERE YEAR(V.Fecha) = 2019
+GROUP BY E.RazonSocial, MONTH(V.Fecha)
+ORDER BY E.RazonSocial, Mes;
+```
+
+# Ejercicio 17 
+Listar las ventas realizadas por día de la semana en todo el historial de la base de datos, pero, 
+ordenada por número de día.
+
+```sql
+SELECT 
+    DATEPART(WEEKDAY, Fecha) AS NumeroDiaSemana,
+    DATENAME(WEEKDAY, Fecha) AS NombreDiaSemana,
+    COUNT(*) AS VentasRealizadasPorDia
+FROM Venta
+GROUP BY DATEPART(WEEKDAY, Fecha), DATENAME(WEEKDAY, Fecha)
+ORDER BY NumeroDiaSemana;
+
+-- FULL GEPETO ESTE
+```
