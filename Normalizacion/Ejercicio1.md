@@ -1,3 +1,24 @@
-![image](https://github.com/user-attachments/assets/132bfebb-b89f-42fb-9c80-5c96e9d05779)
+# Ejercicio 1 
+> Para cada uno de los siguientes esquemas, plantear las dependencias funcionalesque encuentre entre los atributos:CIUDADES (ciu-código-postal, ciu-nombre, ciu-total-habitantes, prov-pertenececod, prov- pertenece-nombre)FACTURA (fac-número, fac-cli-código, fac-cli-nombre, fac-fecha, fac-importe,fac-tipo)
 
-**R** (Ciudad
+**CIUDADES** = (ciu-codigo-postal , ciu-nombre , ciu-total-habitantes , prov-pertenece-cod , prov-pertenece-nombre)
+
+**FACTURA** = (fac-numero , fac-cli-codigo , fac-clinombre , fac-fecha , fac-importe , fac-tipo)
+
+**DF CIUDADES** (Dependencias Funcionales)
+
+ciu-codigo-postal --> ciu-nombre , ciu-total-habitantes , prov-pertenece-cod , prov-pertenece-nombre
+
+> Con el codigo postal podemos obtener todos esos datos
+
+**Se Cumple la 1ra Forma**
+
+**DP CIUDADES** (Dependencias Parciales)
+
+ciu-codigo-postal --> ciu-nombre , ciu-total-habitantes
+pro-pertenece-cod --> prov-pertenece-nomb
+
+**Se Cumple la 2da Forma**
+
+
+
