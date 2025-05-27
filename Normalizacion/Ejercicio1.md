@@ -20,5 +20,13 @@ pro-pertenece-cod --> prov-pertenece-nomb
 
 **Se Cumple la 2da Forma**
 
+**DF FACTURA** (Dependencias Funcionales)
+
+fac-numero , fac-codigo , fac-tipo --> fac-cli-nombre , fac-fecha , fac-importe
+
+**DP FACTURA** (Dependencias Parciales)
+
+fac-cli-codigo --> fac-cli-nombre
+
 
 
